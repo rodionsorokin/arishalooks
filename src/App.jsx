@@ -545,6 +545,10 @@ export function App() {
         if (!response.ok) throw new Error("Could not load the wardrobe.");
         return response.json();
       })
+      .catch(() => fetch(`${import.meta.env.BASE_URL}wardrobe.json`, { cache: "no-store" }).then((response) => {
+        if (!response.ok) throw new Error("Could not load the wardrobe.");
+        return response.json();
+      }))
       .then((loadedItems) => {
         const edits = readEdits();
         const deleted = readDeletedItems();

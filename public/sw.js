@@ -2,7 +2,7 @@ const CACHE = "open-wardrobe-shell-v1";
 const IMAGE_CACHE = "wardrobe-images-v1";
 const ACTIVE_CACHES = new Set([CACHE, IMAGE_CACHE]);
 const MAX_IMAGE_ENTRIES = 800;
-const SHELL = ["/", "/manifest.webmanifest"];
+const SHELL = ["./", "./manifest.webmanifest"];
 
 async function trimImages(cache) {
   const keys = await cache.keys();
@@ -55,6 +55,6 @@ self.addEventListener("fetch", (event) => {
       const copy = response.clone();
       caches.open(CACHE).then((cache) => cache.put(request, copy));
       return response;
-    }).catch(() => caches.match(request).then((cached) => cached || caches.match("/"))));
+    }).catch(() => caches.match(request).then((cached) => cached || caches.match("./"))));
   }
 });
